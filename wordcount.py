@@ -25,7 +25,7 @@ should return a dictionary with words as keys, and their counts as values.
 
 # Your name, plus anyone who helped you with this assignment
 # Give credit where credit is due.
-__author__ = "???"
+__author__ = "Erick Sibrian", "cesar"
 
 import sys
 
@@ -33,15 +33,33 @@ import sys
 def create_word_dict(filename):
     """Returns a word/count dict for the given file."""
     # Your code here
-    return
+    book = open(filename, 'r').read().lower()
+    words = book.split()
+    my_dict = {}
+    for word in words:
+        if word not in my_dict:
+            my_dict[word] = 1
+        else:
+            my_dict[word] += 1
+    return my_dict
+
+
+create_word_dict("books/small.txt")
 
 
 def print_words(filename):
     """Prints one per line '<word> : <count>', sorted
     by word for the given file.
     """
-    # Your code here
-    return
+    my_dict = {}
+    book = create_word_dict(filename)
+    bookList = list(book.keys())
+    bookList.sort()
+    for word in bookList:
+        print(word, book[word])
+
+
+print_words("books/small.txt")
 
 
 def print_top(filename):
