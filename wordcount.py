@@ -25,7 +25,7 @@ should return a dictionary with words as keys, and their counts as values.
 
 # Your name, plus anyone who helped you with this assignment
 # Give credit where credit is due.
-__author__ = "Erick Sibrian", "cesar"
+__author__ = "Erick Sibrian,cesar, Daniel"
 
 import sys
 
@@ -33,7 +33,8 @@ import sys
 def create_word_dict(filename):
     """Returns a word/count dict for the given file."""
     # Your code here
-    book = open(filename, 'r').read().lower()
+    with open(filename, 'r') as f:
+        book = f.read().lower()
     words = book.split()
     my_dict = {}
     for word in words:
@@ -44,28 +45,23 @@ def create_word_dict(filename):
     return my_dict
 
 
-create_word_dict("books/small.txt")
-
-
 def print_words(filename):
     """Prints one per line '<word> : <count>', sorted
     by word for the given file.
     """
-    my_dict = {}
     book = create_word_dict(filename)
     bookList = list(book.keys())
     bookList.sort()
     for word in bookList:
-        print(word, book[word])
-
-
-print_words("books/small.txt")
+        print(f"{word} : {book[word]}")
 
 
 def print_top(filename):
     """Prints the top count listing for the given file."""
-    # Your code here
-    return
+    words = create_word_dict(filename)
+    most_common = sorted(words.items(), key=lambda t: t[-1], reverse=True)
+    for word, count in most_common[:20]:
+        print(f"{word} : {count}")
 
 
 # This basic command line argument parsing code is provided and calls
